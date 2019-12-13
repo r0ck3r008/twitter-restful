@@ -21,8 +21,8 @@
         <tr>
           <td>
             <h3>Who to follow?</h3>
-            <input id="tofollow" class = "textbox" placeholder = "Username" type="text">
-            <button id="btnFollow" class = 'btncls'>Follow</button>
+            <input id="to_follow" class = "textbox" placeholder = "Username" type="text">
+            <button id="follow_btn" class = 'btncls'>Follow</button>
           </td>
         </tr>
         <tr>

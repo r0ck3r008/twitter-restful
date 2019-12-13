@@ -41,6 +41,14 @@ defmodule TwitterWeb.TwitterChannel do
 
     {:noreply, socket}
   end
+
+  def handle_in("follow", payload, socket) do
+    to_follow=payload["to_follow"]
+    uname=payload["uname"]
+    Twitter.User.Public.follow(String.to_atom(uname), String.to_atom(to_follow))
+    {:noreply, socket}
+  end
+
   #similarly for tweet, update timeline, retweet, query tweets
   #this module is intended to replace the Twitter.Api module
 

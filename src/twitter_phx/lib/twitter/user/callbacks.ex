@@ -1,6 +1,7 @@
 defmodule Twitter.User do
 
   use GenServer
+  require Logger
 
   def start_link(u_name_atom) do
     Agent.start_link(fn-> [] end, name: :followers)
@@ -23,6 +24,7 @@ defmodule Twitter.User do
   @impl true
   def handle_cast({:follower, from_atom}, u_name_atom) do
     Agent.update(:followers, &(&1++[from_atom]))
+    Logger.debug("Follow success from #{inspect from_atom}")
     {:noreply, u_name_atom}
   end
 
