@@ -4,10 +4,9 @@ defmodule TwitterWeb.PageController do
   def index(conn, _params) do
     render(conn, "index.html")
   end
-"""
-  def home(conn, %{"username"=>username}) do
-    render conn, "home.html", username: "naman"
+
+  def home(conn, %{"uname"=>uname}) do
+    render conn, "home.html", uname: uname
   end
-  """
 
 end

@@ -52,9 +52,10 @@ document.getElementById("signin").onclick = function() {
 
 channel.on("signin_result", payload=>{
 	let result=payload["res"];
+	let uname=payload["uname"];
 
 	if(result==true){
-		alert("User "+uname+" successfully signed in!");
+		window.location.href="http://127.0.0.1:4000/home/"+uname;
 	}
 	else{
 		alert("Error!!");

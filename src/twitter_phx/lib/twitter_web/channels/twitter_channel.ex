@@ -23,16 +23,20 @@ defmodule TwitterWeb.TwitterChannel do
     #use this to handle authirization
     uname=payload["uname"]
     passwd=payload["passwd"]
-    passwd_hash=Bcrypt.hash_pwd_salt(passwd)
+    passwd_hash=:crypto.hash(:sha256, passwd)
+                |> Base.encode16
 
     res=Twitter.Repo.get_by(Twitter.Accounts, uname: uname)
+        |> IO.inspect
     if res != nil do
       hash=res.passwd_hash
       if hash==passwd_hash do
-        push(socket, "signin_result", %{res: true})
+        IO.puts "Login success"
+        push(socket, "signin_result", %{res: true, uname: uname})
       end
     else
-      push(socket, "signin_result", %{res: false})
+      IO.puts "Login fail"
+      push(socket, "signin_result", %{res: false, uname: uname})
     end
 
     {:noreply, socket}

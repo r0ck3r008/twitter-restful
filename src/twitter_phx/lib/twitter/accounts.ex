@@ -23,7 +23,9 @@ defmodule Twitter.Accounts do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: %{passwd: passwd}}
       ->
-        put_change(changeset, :passwd_hash, Bcrypt.hash_pwd_salt(passwd))
+        hashed=:crypto.hash(:sha256, passwd)
+               |>Base.encode16
+        put_change(changeset, :passwd_hash, hashed)
       _
       ->
         changeset
