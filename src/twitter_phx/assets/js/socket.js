@@ -135,4 +135,42 @@ channel.on("update_feed", payload => {
 	tweet_list.scrollTop
 });
 
+if(document.getElementById("btnhashtag"))
+{
+	let hash = document.querySelector('#hashtag');
+	document.getElementById("btnhashtag").onclick = function() {
+		if(hash != ""){
+			channel.push("get_hash_tag", {hashtag: hash.value});
+		}
+	};
+
+	document.getElementById("hashtag")
+		.addEventListener("keyup", function(event) {
+			event.preventDefault();
+			if (event.keyCode === 13) {
+				document.getElementById("btnhashtag").click();
+			}
+		});
+
+}
+
+channel.on('get_hash_tag', payload => {
+	var hasharea=document.getElementById("hashtagArea");
+	var tweets=payload.tweets;
+	var arrayLength = tweets.length;
+
+	if (arrayLength == 0) {
+		hasharea.value = "No tweet with this hashtag!";
+	}
+	else{
+		hasharea.innerHTML = '';
+		for (var i = 0; i < arrayLength; i++) {
+			hasharea.innerHTML+=(`${payload.tweets[i].tweeter}: ${payload.tweets[i].tweet}`);
+			hasharea.innerHTML+="<br>";
+		}
+	}
+	hasharea.scrollTop;
+	hasharea.scrollLeft;
+});
+
 export default socket

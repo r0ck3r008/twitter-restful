@@ -64,7 +64,12 @@ defmodule TwitterWeb.TwitterChannel do
     push(socket, "tweet_status", %{stat: 1})
     {:noreply, socket}
   end
-  #similarly for tweet, update timeline, retweet, query tweets
-  #this module is intended to replace the Twitter.Api module
+
+  def handle_in("get_hash_tag", payload, socket) do
+    tag=payload["hashtag"]
+    tweets=Twitter.User.Public.fetch_tweets(String.to_atom(tag))
+    push(socket, "get_hash_tag", %{tweets: tweets})
+    {:noreply, socket}
+  end
 
 end
