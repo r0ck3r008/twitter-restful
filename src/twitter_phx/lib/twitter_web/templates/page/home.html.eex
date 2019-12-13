@@ -20,7 +20,7 @@
       <table>
         <tr>
           <td>
-            <h3>Who to follow?</h3>
+            <h3>Who to follow?(tag or user)</h3>
             <input id="to_follow" class = "textbox" placeholder = "Username" type="text">
             <button id="follow_btn" class = 'btncls'>Follow</button>
           </td>
@@ -37,7 +37,7 @@
             <h3>Search Hashtag</h3>
             <div id= "hashtagArea" class='mentions-list'>Hashtags</div>
             <input id="hashtag" class = "textbox" placeholder = "hashtag" type="text">
-            <button id="btnhashtag" class = 'btncls'>Search</button></label>
+            <button id="btnhashtag" class = 'btncls'>Search(Without '#')</button></label>
           </td>
         </tr>
       </table>
