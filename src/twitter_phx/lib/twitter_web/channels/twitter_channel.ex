@@ -15,7 +15,7 @@ defmodule TwitterWeb.TwitterChannel do
       Twitter.Accounts.changeset(%Twitter.Accounts{}, %{uname: uname, passwd: passwd})
       |> Twitter.Repo.insert!
     end
-    push(socket, "signup_result", %{res: res, user: uname})
+    push(socket, "signup_result", %{res: res, uname: uname})
     {:noreply, socket}
   end
 
