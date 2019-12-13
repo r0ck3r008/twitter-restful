@@ -1,12 +1,29 @@
 defmodule Twitter.User do
 
+  use GenServer
+
   def start_link(u_name_atom) do
-    GenServer.start_link(__MODULE__, :ok, name: u_name_atom)
+    Agent.start_link(fn-> [] end, name: :followers)
+    Agent.start_link(fn-> [] end, name: :follow_to)
+    GenServer.start_link(__MODULE__, u_name_atom, name: u_name_atom)
   end
 
   @impl true
-  def init(:ok) do
-    {:ok, []}
+  def init(u_name_atom) do
+    {:ok, u_name_atom}
+  end
+
+  @impl true
+  def handle_cast({:follow, to_atom}, u_name_atom) do
+    Twitter.Relay.Public.follow(u_name_atom, to_atom)
+    Agent.update(:follow_to, &(&1++[to_atom]))
+    {:noreply, u_name_atom}
+  end
+
+  @impl true
+  def handle_cast({:follower, from_atom}, u_name_atom) do
+    Agent.update(:followers, &(&1++[from_atom]))
+    {:noreply, u_name_atom}
   end
 
 end

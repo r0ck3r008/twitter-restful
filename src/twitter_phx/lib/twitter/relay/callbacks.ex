@@ -37,5 +37,13 @@ defmodule Twitter.Relay do
     end
   end
   ############management related
+  
+  ###########follow related
+  @impl true
+  def handle_cast({:follow, from_atom, to_atom}, _) do
+    Twitter.User.Public.followed_notif(to_atom, from_atom)
+    {:noreply, []}
+  end
+  ############follow related
 
 end
