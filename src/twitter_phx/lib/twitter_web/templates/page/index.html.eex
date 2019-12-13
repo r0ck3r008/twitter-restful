@@ -4,11 +4,11 @@
 <div>
   <center>
     <div>
-      <div class="signupPart">
+      <div class="signupForm">
         <center><h3>Join or Login</h3>
           <p>
-          <input class= "tweetContent" id="username" placeholder = "Username" type="text"><br/>
-          <br/><input class= "tweetContent" id="password" placeholder = "*******" type="password"><br/>
+          <input class= "tweetContent" id="uname" placeholder = "Username" type="text"><br/>
+          <br/><input class= "tweetContent" id="passwd" placeholder = "*******" type="password"><br/>
           <br/><button id="signin" class = 'btncls'>Login</button>
           <input id="signup" type="submit" value="Signup" class = 'btncls'>
           </p>

@@ -17,7 +17,6 @@ defmodule TwitterWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-#    get "/home/:username", PageController, :home
   end
 
   # Other scopes may use custom stacks.

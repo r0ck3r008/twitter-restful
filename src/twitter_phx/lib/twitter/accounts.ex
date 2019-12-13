@@ -16,16 +16,16 @@ defmodule Twitter.Accounts do
     |> cast(attrs, [:uname, :passwd_hash, :passwd])
     |> validate_required([:uname, :passwd])
     |> unique_constraint(:uname)
-    |> passwd_changeset
+    |> put_passwd
   end
 
-  defp passwd_changeset(changeset) do
+  defp put_passwd(changeset) do
     case changeset do
-    %Ecto.Changeset{valid?: true, changes: %{passwd: passwd}}
-    ->
+      %Ecto.Changeset{valid?: true, changes: %{passwd: passwd}}
+      ->
         put_change(changeset, :passwd_hash, Bcrypt.hash_pwd_salt(passwd))
-    _
-    ->
+      _
+      ->
         changeset
     end
   end
