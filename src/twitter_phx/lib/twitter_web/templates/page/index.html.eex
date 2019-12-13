@@ -10,7 +10,7 @@
           <input class= "tweetContent" id="uname" placeholder = "Username" type="text"><br/>
           <br/><input class= "tweetContent" id="passwd" placeholder = "*******" type="password"><br/>
           <br/><button id="signin" class = 'btncls'>Login</button>
-          <input id="signup" type="submit" value="Signup" class = 'btncls'>
+          <button id="signup" class='btncls'>Signup</button>
           </p>
         </center>
       </div>

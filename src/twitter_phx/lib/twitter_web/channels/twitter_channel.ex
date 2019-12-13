@@ -19,10 +19,25 @@ defmodule TwitterWeb.TwitterChannel do
     {:noreply, socket}
   end
 
-  def handle_int("signin", _payload, _socket) do
+  def handle_in("signin", payload, socket) do
     #use this to handle authirization
-  end
+    uname=payload["uname"]
+    passwd=payload["passwd"]
+    passwd_hash=Bcrypt.hash_pwd_salt(passwd)
 
+    res=Twitter.Repo.get_by(Twitter.Accounts, uname: uname)
+        |> IO.inspect
+    if res != nil do
+      hash=res.passwd_hash
+      if hash==passwd_hash do
+        push(socket, "signin_result", %{res: true})
+      end
+    else
+      push(socket, "signin_result", %{res: false})
+    end
+
+    {:noreply, socket}
+  end
   #similarly for tweet, update timeline, retweet, query tweets
   #this module is intended to replace the Twitter.Api module
 
