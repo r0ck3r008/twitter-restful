@@ -51,7 +51,7 @@ document.getElementById("signin").onclick = function() {
 };
 
 channel.on("signin_result", payload=>{
-	let result=payload["result"];
+	let result=payload["res"];
 
 	if(result==true){
 		alert("User "+uname+" successfully signed in!");

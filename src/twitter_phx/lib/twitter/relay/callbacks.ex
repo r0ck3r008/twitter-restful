@@ -18,12 +18,12 @@ defmodule Twitter.Relay do
   @impl true
   def handle_call({:signup, u_name_atom}, _from, _) do
     state=Agent.get(:u_agnt, fn(state)->state end)
-    if u_name_atom not in state do
+    if u_name_atom in state do
+      {:reply, false, []}
+    else
       Twitter.User.start_link(u_name_atom)
       Agent.update(:u_agnt, &(&1++[u_name_atom]))
       {:reply, true, []}
-    else
-      {:reply, false, []}
     end
   end
 

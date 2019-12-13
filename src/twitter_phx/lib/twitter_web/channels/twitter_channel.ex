@@ -26,7 +26,6 @@ defmodule TwitterWeb.TwitterChannel do
     passwd_hash=Bcrypt.hash_pwd_salt(passwd)
 
     res=Twitter.Repo.get_by(Twitter.Accounts, uname: uname)
-        |> IO.inspect
     if res != nil do
       hash=res.passwd_hash
       if hash==passwd_hash do
