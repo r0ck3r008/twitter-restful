@@ -61,19 +61,24 @@ channel.join()
 	.receive("ok", resp => { console.log("Joined successfully", resp) })
 	.receive("error", resp => { console.log("Unable to join", resp) })
 
-document.querySelector("#signupForm").addEventListener('signup', (e) => {
-	e.preventDefault()
-	let uname=document.querySelector('#uname');
-	let passwd=document.querySelector('#passwd');
-
-	channel.push('signup', {uname: uname.value, passwd: passwd.value})
-});
+let uname=document.querySelector("#uname");
+let passwd=document.querySelector("#passwd");
+document.getElementById("signup").onclick = function() {
+	if(passwd.value != "" || uname.value != ""){
+		channel.push("signup", {uname: uname.value, passwd: passwd.value});
+	}
+	else{
+		alert("Empty username or password not allowed")
+	}
+	uname.value = "";
+	passwd.value = "";
+};
 
 channel.on("signup_result", payload=>{
 	let result=payload["result"];
 	let uname=payload["uname"];
 
-	if(res==true){
+	if(result==true){
 		alert("User "+uname+" successfully signed up!");
 	}
 	else{
