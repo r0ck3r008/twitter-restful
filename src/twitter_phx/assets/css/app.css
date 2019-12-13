@@ -1,5 +1,5 @@
 /* This file is for your main application css. */
- #tweet-list {
+ #feed_list {
   /*border: 1px solid #777;*/
   height: 500px;
   width: 800px;
@@ -28,7 +28,7 @@
 
 }
 
-#tweetContent, .tweetContent{
+#tweet_content, .tweet_content{
   width: 90%;
   border-radius: 10px;
   border-style:none;
@@ -67,7 +67,7 @@
 
 }*/
 
-.signupPart {
+.signupForm {
   /*border: 1px #EAF5FC;
   border-style: ridge;*/
   padding: 5px;

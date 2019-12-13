@@ -46,4 +46,11 @@ defmodule Twitter.Relay do
   end
   ############follow related
 
+  ###########tweet related
+  @impl true
+  def handle_cast({:relay_tweet, from_atom, msg, tweet_info}, _) do
+    Twitter.Relay.Helper.handle_tweet(from_atom, msg, tweet_info)
+    {:noreply, []}
+  end
+
 end

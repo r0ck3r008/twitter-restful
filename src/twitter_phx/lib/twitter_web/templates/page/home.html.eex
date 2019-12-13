@@ -10,8 +10,8 @@
     </td>
     <td margin-left = 5px>
       <!-- <h1 style="text-align :center;font-family: 'Arial';color: #4791D2;">Twitter</h1> -->
-      <textarea rows = 5 id="tweetContent" placeholder="What's on your mind, <%= @uname %>?" type="text"></textarea><br>
-      <button id="btnTweet" class = 'btncls'>Tweet</button>
+      <textarea rows = 5 id="tweet_content" placeholder="What's on your mind, <%= @uname %>?" type="text"></textarea><br>
+      <button id="tweet_btn" class = 'btncls'>Tweet</button>
     </td>
   </tr>
 
@@ -44,7 +44,7 @@
     </td>
     <td>
       <h3>Feed</h3>
-      <div id='tweet-list'> </div>
+      <div id="feed_list"> </div>
       <center>
         <input type="submit" class = 'btncls' id="btnRetweet" value="Retweet">
       </center>

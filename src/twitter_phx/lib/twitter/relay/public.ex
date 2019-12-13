@@ -13,4 +13,12 @@ defmodule Twitter.Relay.Public do
     GenServer.cast(:relay, {:follow, from_atom, to_atom})
   end
 
+  def relay_tweet(from_atom, msg, followers, :noparse) do
+    GenServer.cast(:relay, {:relay_tweet, from_atom, msg, [[], []]++[followers]})
+  end
+  def relay_tweet(from_atom, msg, followers) do
+    tweet_info=Twitter.Relay.Helper.parse_tweet(msg)
+    GenServer.cast(:relay, {:relay_tweet, from_atom, msg, tweet_info++[followers]})
+  end
+
 end

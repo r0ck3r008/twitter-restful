@@ -1,8 +1,8 @@
 defmodule TwitterWeb.TwitterChannel do
   use TwitterWeb, :channel
 
-  def join("twitter:lobby", _payload, socket) do
-    {:ok, %{channel: "twitter:lobby"}, socket}
+  def join("twitter:room", _payload, socket) do
+    {:ok, %{channel: "twitter:room"}, socket}
   end
 
   def handle_in("signup", payload, socket) do
@@ -49,6 +49,21 @@ defmodule TwitterWeb.TwitterChannel do
     {:noreply, socket}
   end
 
+  def handle_in("update_feed", payload, socket) do
+    uname=payload["uname"]
+    tweets=Twitter.User.Public.fetch_tweets(String.to_atom(uname))
+           |>IO.inspect
+    push(socket, "update_feed", %{tweets: tweets})
+    {:noreply, socket}
+  end
+
+  def handle_in("tweet", payload, socket) do
+    tweeter=payload["uname"]
+    tweet=payload["tweet"]
+    Twitter.User.Public.tweet(String.to_atom(tweeter), tweet)
+    push(socket, "tweet_status", %{stat: 1})
+    {:noreply, socket}
+  end
   #similarly for tweet, update timeline, retweet, query tweets
   #this module is intended to replace the Twitter.Api module
 
