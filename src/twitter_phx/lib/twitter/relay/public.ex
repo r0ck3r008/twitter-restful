@@ -21,4 +21,8 @@ defmodule Twitter.Relay.Public do
     GenServer.cast(:relay, {:relay_tweet, from_atom, msg, tweet_info++[followers]})
   end
 
+  def retweet(of, from, tweet) do
+    GenServer.cast(:relay, {:retweet, of, from, tweet})
+  end
+
 end

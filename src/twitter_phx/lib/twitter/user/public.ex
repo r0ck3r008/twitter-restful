@@ -23,4 +23,13 @@ defmodule Twitter.User.Public do
     GenServer.call(of, :fetch_mentions)
   end
 
+  def retweet(of, from, tweet) do
+    Twitter.Relay.Public.retweet(of, from, tweet)
+    GenServer.cast(of, {:tweet, "Retweet: "<>tweet, :noparse})
+  end
+
+  def retweet_notif(of, tweet, from) do
+    GenServer.cast(of, {:retweet_notif, from, tweet})
+  end
+
 end

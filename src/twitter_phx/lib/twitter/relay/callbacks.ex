@@ -53,4 +53,10 @@ defmodule Twitter.Relay do
     {:noreply, []}
   end
 
+  @impl true
+  def handle_cast({:retweet, of, from, tweet}, _) do
+    Twitter.User.Public.retweet_notif(from, tweet, of)
+    {:noreply, []}
+  end
+
 end

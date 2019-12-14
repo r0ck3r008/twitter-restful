@@ -102,4 +102,10 @@ defmodule Twitter.User do
     {:reply, mentioned_l, u_name_atom}
   end
 
+  @impl true
+  def handle_cast({:retweet_notif, from, tweet}, u_name_atom) do
+    Logger.info("#{inspect from} retweeted #{tweet}!")
+    {:noreply, u_name_atom}
+  end
+
 end

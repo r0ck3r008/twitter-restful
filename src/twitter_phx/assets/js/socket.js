@@ -201,4 +201,13 @@ channel.on("get_mentions", payload => {
 	area.scrollLeft;
 });
 
+if(document.getElementById("btnRetweet"))
+{
+	document.getElementById("btnRetweet").onclick = function() {
+		var userID =  get_self_name();
+		var val_radio = $('input[name=radioTweet]:checked').attr("tweet");
+		var org_user = $('input[name=radioTweet]:checked').attr("tweeter");
+		channel.push('retweet', {uname: get_self_name(), tweet: val_radio, org: org_user});
+	}};
+
 export default socket

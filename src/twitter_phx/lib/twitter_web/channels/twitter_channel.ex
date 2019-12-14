@@ -80,4 +80,13 @@ defmodule TwitterWeb.TwitterChannel do
     {:noreply, socket}
   end
 
+  def handle_in("retweet", payload, socket) do
+    tweeter=payload["uname"]
+    tweet=payload["tweet"]
+    org=payload["org"]
+    Twitter.User.Public.retweet(String.to_atom(tweeter), String.to_atom(org), tweet)
+    push(socket, "tweet_status", %{stat: 1})
+    {:noreply, socket}
+  end
+
 end
