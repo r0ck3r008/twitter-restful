@@ -19,4 +19,8 @@ defmodule Twitter.User.Public do
     GenServer.call(of, :fetch_tweets)
   end
 
+  def fetch_mentions(of) do
+    GenServer.call(of, :fetch_mentions)
+  end
+
 end

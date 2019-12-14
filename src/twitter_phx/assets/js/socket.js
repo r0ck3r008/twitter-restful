@@ -173,4 +173,32 @@ channel.on('get_hash_tag', payload => {
 	hasharea.scrollLeft;
 });
 
+if(document.getElementById("btnMyMentions"))
+{
+	var userID=get_self_name();
+
+	document.getElementById("btnMyMentions").onclick = function() {
+		channel.push("get_mentions", {uname:userID});
+	};
+}
+
+channel.on("get_mentions", payload => {
+	var area=document.getElementById("mentionsArea");
+	var myTweets = payload.tweets;
+	var arrayLength = myTweets.length;
+
+	if (arrayLength == 0) {
+		area.value = "I am not mentioned yet!";
+	}
+	else{
+		area.innerHTML = '';
+		for (var i = 0; i < arrayLength; i++) {
+			area.innerHTML+=(`${payload.tweets[i].tweeter}: ${payload.tweets[i].tweet}`);
+			area.innerHTML+="<br>";
+		}
+	}
+	area.scrollTop;
+	area.scrollLeft;
+});
+
 export default socket

@@ -95,4 +95,11 @@ defmodule Twitter.User do
     {:reply, Enum.uniq(List.flatten(tweets)), u_name_atom}
   end
 
+  @impl true
+  def handle_call(:fetch_mentions, _from, u_name_atom) do
+    tweets=Agent.get(Helper.get_agnt(u_name_atom, :tweets), fn(state)-> state end)
+    mentioned_l=Helper.get_mentions(u_name_atom, tweets)
+    {:reply, mentioned_l, u_name_atom}
+  end
+
 end

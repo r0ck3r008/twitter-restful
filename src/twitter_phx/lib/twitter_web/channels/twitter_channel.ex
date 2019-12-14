@@ -72,4 +72,12 @@ defmodule TwitterWeb.TwitterChannel do
     {:noreply, socket}
   end
 
+  def handle_in("get_mentions", payload, socket) do
+    uname=payload["uname"]
+    tweets=Twitter.User.Public.fetch_mentions(String.to_atom(uname))
+           |>IO.inspect
+    push(socket, "get_mentions", %{tweets: tweets})
+    {:noreply, socket}
+  end
+
 end
