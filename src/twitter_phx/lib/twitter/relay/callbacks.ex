@@ -28,6 +28,12 @@ defmodule Twitter.Relay do
   end
 
   @impl true
+  def handle_call(:fetch_users, _from, _) do
+    state=Agent.get(:u_agnt, fn(state)->state end)
+    {:reply, state, []}
+  end
+
+  @impl true
   def handle_call({:user?, u_name_atom}, _from, _) do
     state=Agent.get(:u_agnt, fn(state)-> state end)
     if u_name_atom in state do

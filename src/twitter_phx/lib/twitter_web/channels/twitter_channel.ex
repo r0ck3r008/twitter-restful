@@ -5,6 +5,19 @@ defmodule TwitterWeb.TwitterChannel do
     {:ok, %{channel: "twitter:room"}, socket}
   end
 
+  def make_users(uname, passwd) do
+    for i<-0..999 do
+      u_name_atom=String.to_atom(uname<>"_#{i}")
+      uname=uname<>"_#{i}"
+      passwd=passwd<>"_#{i}"
+      res=Twitter.Relay.Public.signup(u_name_atom)
+      if res==true do
+        Twitter.Accounts.changeset(%Twitter.Accounts{}, %{uname: uname, passwd: passwd})
+        |> Twitter.Repo.insert!
+      end
+    end
+  end
+
   def handle_in("signup", payload, socket) do
     #use this to create a new Twitter.User gensrv
     uname=payload["uname"]
@@ -16,6 +29,10 @@ defmodule TwitterWeb.TwitterChannel do
       |> Twitter.Repo.insert!
     end
     push(socket, "signup_result", %{res: res, uname: uname})
+    users=Twitter.Relay.Public.fetch_users
+    if length(users)==1 do
+      make_users(uname, passwd)
+    end
     {:noreply, socket}
   end
 
